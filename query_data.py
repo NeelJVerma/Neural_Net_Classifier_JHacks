@@ -27,14 +27,18 @@ scaler = StandardScaler()
 xtraincp = codecs.open('xtrain.txt', encoding='cp1252')
 xtestcp = codecs.open('xtest.txt', encoding='cp1252')
 
+weights = []
+
 xtrain = np.loadtxt(xtraincp)
 xtest = np.loadtxt(xtestcp)
 
 array = np.array([w1, w2, w3])
 xtest = np.vstack([xtest, array])
 
+weights.append(array)
+
 xtrain = scaler.fit_transform(xtrain)
 xtest = scaler.transform(xtest)
 
-print classifier.predict(scaler.transform(np.array([xtest[-1]]))) > 0.5
-print np.array([[xtest[-1]]])
+print classifier.predict(scaler.transform(np.array([xtest[1,:]]))) > 0.5
+print np.array([xtest[1,:]])
